@@ -102,24 +102,39 @@
   }
 }
 
-/// Make a colour darker by mixing it with black
+/// This function creates a color-mix() css function to mix two colors together based on a specified percentage in the browser.
 ///
-/// @param {Colour} $colour - colour to shade
-/// @param {Number} $percentage - percentage of black to mix with $colour
-/// @return {Colour}
+/// @param {*} $colour1 - The first color to mix. Can be a color defined as a sass variable or a CSS variable
+/// @param {*} $colour2 - The second color to mix. Can be a color defined as a sass variable or a CSS variable
+/// @param {number} $percentage - The percentage or ratio of the mixing.
+/// @param {string, optional} $colour-space - The color space of the colors. The default is oklab
+/// @returns {*} - The resulting css color-mix function.
 /// @access public
 
-@function govuk-shade($colour, $percentage) {
-  @return mix(#000000, $colour, $percentage);
+@function mix($colour1, $colour2, $percentage, $colour-space: oklab) {
+  @return color-mix(in $colour-space, $colour1, $colour2 $percentage);
+}
+
+/// Make a colour darker by mixing it with black
+///
+/// @param {*} $colour - colour to tint. Can be a color defined as a sass variable or a CSS variable
+/// @param {Number} $percentage - percentage of white to mix with $colour
+/// @param {string, optional} $colour-space - The colour space of the colors. The default is oklab
+/// @returns {*} - The shaded colour as a css color-mix function
+/// @access public
+
+@function govuk-shade($colour, $percentage, $colour-space: oklab) {
+  @return mix($colour, #000, $percentage, $colour-space);
 }
 
 /// Make a colour lighter by mixing it with white
 ///
-/// @param {Colour} $colour - colour to tint
+/// @param {*} $colour - colour to tint. Can be a color defined as a sass variable or a CSS variable
 /// @param {Number} $percentage - percentage of white to mix with $colour
-/// @return {Colour}
+/// @param {string, optional} $colour-space - The color space of the colors. The default is oklab
+/// @returns {*} - The tinted colour as a css color-mix function
 /// @access public
 
-@function govuk-tint($colour, $percentage) {
-  @return mix(govuk-colour("white"), $colour, $percentage);
+@function govuk-tint($colour, $percentage, $colour-space: oklab) {
+  @return mix($colour, govuk-colour("white"), $percentage, $colour-space);
 }
