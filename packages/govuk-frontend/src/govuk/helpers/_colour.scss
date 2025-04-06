@@ -112,7 +112,7 @@
 /// @access public
 
 @function mix($colour1, $colour2, $percentage, $colour-space: oklab) {
-  @return color-mix(in $colour-space, $colour1, $colour2 $percentage);
+  @return color-mix(in $colour-space, $colour1 $percentage, $colour2);
 }
 
 /// Make a colour darker by mixing it with black
